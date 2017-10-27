@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_nbrlen(int n)
+#include "libft.h"
+
+size_t	ft_nbrlen(long long int n)
 {
 	int i;
 

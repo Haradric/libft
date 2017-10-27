@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_lstremoveelem.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 10:56:26 by mbraslav          #+#    #+#             */
-/*   Updated: 2016/11/30 10:56:41 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:12:49 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:12:50 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_list.h"
 
-char	*ft_strtrim(char const *s)
+void	ft_lstremoveelem(t_list **list, t_list *elem)
 {
-	int		start;
-	int		finish;
-	char	*str;
-	int		i;
-
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (ft_isspace(s[i]))
-		i++;
-	if (!s[i])
-		return (ft_strnew(1));
-	start = i;
-	i = 0;
-	while (s[i])
-		i++;
-	i--;
-	while (ft_isspace(s[i]))
-		i--;
-	finish = i;
-	str = ft_strsub(s, start, finish - start + 1);
-	return (str);
+	if (!(*list) || !elem || !ft_lstisinlist(*list, elem))
+		return ;
+	if (elem->prev)
+		elem->prev->next = elem->next;
+	else
+		*list = elem->next;
+	if (elem->next)
+		elem->next->prev = elem->prev;
+	elem->prev = NULL;
+	elem->next = NULL;
 }

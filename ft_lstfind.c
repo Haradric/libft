@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_lstfind.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 10:56:26 by mbraslav          #+#    #+#             */
-/*   Updated: 2016/11/30 10:56:41 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:14:43 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:14:44 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_list.h"
 
-char	*ft_strtrim(char const *s)
+t_list	*ft_lstfind(t_list *list, void *content, size_t content_size)
 {
-	int		start;
-	int		finish;
-	char	*str;
-	int		i;
-
-	if (!s)
+	if (!list || !content_size || !content)
 		return (NULL);
-	i = 0;
-	while (ft_isspace(s[i]))
-		i++;
-	if (!s[i])
-		return (ft_strnew(1));
-	start = i;
-	i = 0;
-	while (s[i])
-		i++;
-	i--;
-	while (ft_isspace(s[i]))
-		i--;
-	finish = i;
-	str = ft_strsub(s, start, finish - start + 1);
-	return (str);
+	while (list)
+	{
+		if (content_size == list->content_size \
+			&& !ft_memcmp(list->content, content, content_size))
+			return (list);
+		list = list->next;
+	}
+	return (NULL);
 }

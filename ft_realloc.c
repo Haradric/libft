@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 10:56:26 by mbraslav          #+#    #+#             */
-/*   Updated: 2016/11/30 10:56:41 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/05/01 14:50:26 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/05/01 14:50:36 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	int		start;
-	int		finish;
-	char	*str;
-	int		i;
+	void	*new;
 
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (ft_isspace(s[i]))
-		i++;
-	if (!s[i])
-		return (ft_strnew(1));
-	start = i;
-	i = 0;
-	while (s[i])
-		i++;
-	i--;
-	while (ft_isspace(s[i]))
-		i--;
-	finish = i;
-	str = ft_strsub(s, start, finish - start + 1);
-	return (str);
+	new = ft_memalloc(new_size);
+	ft_memcpy(new, ptr, old_size);
+	free(ptr);
+	return (new);
 }

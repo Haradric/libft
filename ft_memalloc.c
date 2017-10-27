@@ -10,19 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 void	*ft_memalloc(size_t size)
 {
-	void	*p;
+	void	*ptr;
 
-	p = malloc(size);
-	if (p == NULL)
+	ptr = malloc(size);
+	if (!ptr)
 		return (NULL);
-	else
-	{
-		ft_bzero(p, size);
-		return (p);
-	}
+	ft_memset(ptr, 0, size);
+	return (ptr);
 }

@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_wcharlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 10:56:26 by mbraslav          #+#    #+#             */
-/*   Updated: 2016/11/30 10:56:41 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:13:44 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:13:44 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_wchar.h"
 
-char	*ft_strtrim(char const *s)
+size_t	ft_wcharlen(wchar_t wchar)
 {
-	int		start;
-	int		finish;
-	char	*str;
-	int		i;
-
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (ft_isspace(s[i]))
-		i++;
-	if (!s[i])
-		return (ft_strnew(1));
-	start = i;
-	i = 0;
-	while (s[i])
-		i++;
-	i--;
-	while (ft_isspace(s[i]))
-		i--;
-	finish = i;
-	str = ft_strsub(s, start, finish - start + 1);
-	return (str);
+	if (wchar > 0 && wchar < 127)
+		return (1);
+	else if (wchar > 128 && wchar < 2047)
+		return (2);
+	else if (wchar > 2048 && wchar < 65535)
+		return (3);
+	else if (wchar > 65536 && wchar < 2097151)
+		return (4);
+	else if (wchar > 2097152 && wchar < 67108863)
+		return (5);
+	else
+		return (6);
 }

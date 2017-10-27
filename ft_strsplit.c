@@ -10,64 +10,47 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
-static size_t	words_count(char const *str, char c)
+static size_t	word_count(char const *s, char c)
 {
-	int count;
+	int		i;
 
-	count = 0;
-	while (*str)
+	i = 0;
+	while (*s)
 	{
-		while (*str && *str == c)
-			str++;
-		if (*str && *str != c)
-			count++;
-		while (*str && *str != c)
-			str++;
+		while (*s && *s == c)
+			s++;
+		if (*s && *s != c)
+			i++;
+		while (*s && *s != c)
+			s++;
 	}
-	return (count);
-}
-
-static size_t	word_len(char const *str, char c)
-{
-	int len;
-
-	len = 0;
-	while (*str && *str != c)
-	{
-		str++;
-		len++;
-	}
-	return (len);
+	return (i);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char	**array;
-	int		len;
+	char	**arr;
+	char	*start;
 	int		i;
 
-	if (!s)
-		return (NULL);
-	if (!(array = (char **)malloc(sizeof(char*) * (words_count(s, c) + 1))))
+	if (!s || !(arr = (char **)malloc(sizeof(char *) * (word_count(s, c) + 1))))
 		return (NULL);
 	i = 0;
-	len = 0;
 	while (*s)
 	{
 		if (*s != c)
 		{
-			len = word_len(s, c);
-			array[i] = ft_strnew(len);
-			ft_strncpy(array[i++], s, len);
-			s += len;
+			start = (char *)s;
+			while (*s && *s != c)
+				s++;
+			arr[i++] = ft_strsub(start, 0, s - start);
 		}
 		if (*s == '\0')
 			break ;
 		s++;
 	}
-	array[i] = NULL;
-	return (array);
+	arr[i] = NULL;
+	return (arr);
 }

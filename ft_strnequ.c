@@ -21,10 +21,10 @@ int		ft_strnequ(char const *s1, char const *s2, size_t len)
 	i = 0;
 	while (s1[i] && i < len)
 	{
-		if ((t_byte)s1[i] - (t_byte)s2[i])
+		if ((unsigned char)s1[i] - (unsigned char)s2[i])
 			return (0);
 		i++;
 	}
-	return ((((t_byte)s1[i] - (t_byte)s2[i])
+	return ((((unsigned char)s1[i] - (unsigned char)s2[i])
 	&& (i != len)) ? 0 : 1);
 }

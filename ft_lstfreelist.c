@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_lstfreelist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 10:56:26 by mbraslav          #+#    #+#             */
-/*   Updated: 2016/11/30 10:56:41 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:12:18 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:12:20 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_list.h"
 
-char	*ft_strtrim(char const *s)
+void	ft_lstfreelist(t_list **list, void (*freecont)(void *content))
 {
-	int		start;
-	int		finish;
-	char	*str;
-	int		i;
+	t_list	*tmp;
 
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (ft_isspace(s[i]))
-		i++;
-	if (!s[i])
-		return (ft_strnew(1));
-	start = i;
-	i = 0;
-	while (s[i])
-		i++;
-	i--;
-	while (ft_isspace(s[i]))
-		i--;
-	finish = i;
-	str = ft_strsub(s, start, finish - start + 1);
-	return (str);
+	if (!list || !*list)
+		return ;
+	while (*list)
+	{
+		tmp = (*list)->next;
+		if (freecont)
+			freecont((*list)->content);
+		free(*list);
+		*list = tmp;
+	}
+	*list = NULL;
 }

@@ -10,19 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_list.h"
 
-int	ft_lstlen(t_list *list)
+size_t	ft_lstlen(t_list *list)
 {
-	int		size;
-	t_list	*listcpy;
+	size_t	len;
 
-	size = 0;
-	listcpy = list;
-	while (listcpy != NULL)
+	len = 0;
+	while (list)
 	{
-		listcpy = listcpy->next;
-		size++;
+		list = list->next;
+		len++;
 	}
-	return (size);
+	return (len);
 }

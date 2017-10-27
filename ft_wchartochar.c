@@ -1,39 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strtrim.c                                       :+:      :+:    :+:   */
+/*   ft_wchartochar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 10:56:26 by mbraslav          #+#    #+#             */
-/*   Updated: 2016/11/30 10:56:41 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:16:07 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:16:08 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_wchar.h"
 
-char	*ft_strtrim(char const *s)
+char	*ft_wchartochar(wchar_t wchar)
 {
-	int		start;
-	int		finish;
-	char	*str;
-	int		i;
+	char	*s;
+	size_t	len;
+	size_t	n;
 
-	if (!s)
-		return (NULL);
-	i = 0;
-	while (ft_isspace(s[i]))
-		i++;
-	if (!s[i])
-		return (ft_strnew(1));
-	start = i;
-	i = 0;
-	while (s[i])
-		i++;
-	i--;
-	while (ft_isspace(s[i]))
-		i--;
-	finish = i;
-	str = ft_strsub(s, start, finish - start + 1);
-	return (str);
+	len = ft_wcharlen(wchar);
+	s = ft_strnew(len + 1);
+	if (len == 1)
+	{
+		*s = (char)wchar;
+		return (s);
+	}
+	n = len;
+	while (n)
+	{
+		if (n != 1)
+		{
+			*(s + (n - 1)) = wchar % 64 + 128;
+			wchar >>= 6;
+		}
+		n--;
+	}
+	*s = ft_power(2, 8) - ft_power(2, 8 - len) + wchar;
+	return (s);
 }
