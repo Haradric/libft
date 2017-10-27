@@ -76,8 +76,9 @@ SOURCE =	ft_memset.c\
 			ft_lstfind.c\
 			ft_lstfreeelem.c\
 			ft_lstfreelist.c\
+			ft_lstgetelem.c\
 			ft_lstgetlast.c\
-			ft_lstinsertelem.c\
+			ft_lstinsert.c\
 			ft_lstisinlist.c\
 			ft_lstlen.c\
 			ft_lstpushback.c\

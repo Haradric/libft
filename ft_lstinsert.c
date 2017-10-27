@@ -12,18 +12,18 @@
 
 #include "ft_list.h"
 
-void	ft_lstinsert(t_list **list, t_list *prev, t_list *list2, t_list *next)
+void	ft_lstinsert(t_list **list, t_list *prev, t_list *elem, t_list *next)
 {
 	t_list	*last;
 
-	if (!*list || !list2)
+	if (!*list || !elem)
 		return ;
-	last = ft_lstgetlast(list2);
+	last = ft_lstgetlast(elem);
 	if (prev)
-		prev->next = list2;
+		prev->next = elem;
 	else
-		*list = list2;
-	list2->prev = prev;
+		*list = elem;
+	elem->prev = prev;
 	if (next)
 		next->prev = last;
 	last->next = next;
