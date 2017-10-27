@@ -14,15 +14,5 @@
 
 char	*ft_strnew(size_t size)
 {
-	char	*str;
-	char	*res;
-
-	str = ft_memalloc(size + 1);
-	if (str == NULL)
-		return (NULL);
-	res = str;
-	*(str + size) = '\0';
-	while (*str)
-		*str++ = '\0';
-	return (res);
+	return (ft_memalloc(size + 1));
 }
