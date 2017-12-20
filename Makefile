@@ -110,7 +110,7 @@ $(NAME): $(OBJECT)
 	$(CC) $(FLAGS) -o $@ -c $<
 
 clean:
-	@echo "\033[34mremoving object files\033[39m"
+	@echo "\033[34mremoving object files of libft\033[39m"
 	@rm -f $(OBJECT)
 
 fclean: clean
