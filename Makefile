@@ -101,16 +101,20 @@ OBJECT = $(SOURCE:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJECT)
-	ar rc $(NAME) $(OBJECT)
-	ranlib $(NAME)
+	@echo "\033[34mcreating $(NAME)\033[39m"
+	@ar rc $(NAME) $(OBJECT)
+	@echo "\033[34mgenerating index to $(NAME)\033[39m"
+	@ranlib $(NAME)
 
 %.o: %.c
 	$(CC) $(FLAGS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJECT)
+	@echo "\033[34mremoving object files\033[39m"
+	@rm -f $(OBJECT)
 
 fclean: clean
-	rm -f $(NAME)
+	@echo "\033[34mremoving $(NAME)\033[39m"
+	@rm -f $(NAME)
 
 re: fclean all
