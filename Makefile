@@ -113,7 +113,9 @@ clean:
 	@echo "\033[34mremoving object files of libft\033[39m"
 	@rm -f $(OBJECT)
 
-fclean: clean
+fclean:
+	@echo "\033[34mremoving object files of libft\033[39m"
+	@rm -f $(OBJECT)
 	@echo "\033[34mremoving $(NAME)\033[39m"
 	@rm -f $(NAME)
 
