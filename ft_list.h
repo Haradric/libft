@@ -52,5 +52,4 @@ t_list				*ft_lstdupelem(t_list *elem);
 t_list				*ft_lstfind(t_list *list, void *content,\
 								size_t content_size);
 
-
 #endif
