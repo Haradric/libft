@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstinsert.c                                     :+:      :+:    :+:   */
+/*   ft_lstpushback.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/14 14:42:07 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/06/14 14:42:09 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/06/14 14:42:43 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/06/14 14:42:45 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-void	ft_lstinsert(t_list **list, t_list *prev, t_list *elem, t_list *next)
+void	ft_lstpushback(t_list **list, t_list *elem)
 {
 	t_list	*last;
 
-	if (!*list || !elem)
-		return ;
-	last = ft_lstgetlast(elem);
-	if (prev)
-		prev->next = elem;
-	else
+	if (!(*list))
+	{
 		*list = elem;
-	elem->prev = prev;
-	if (next)
-		next->prev = last;
-	last->next = next;
+		return ;
+	}
+	if (!elem)
+		return ;
+	last = ft_lstgetlast(*list);
+	last->next = elem;
+	elem->prev = last;
+	elem->next = NULL;
 }

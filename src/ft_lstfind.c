@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wchartochar.c                                   :+:      :+:    :+:   */
+/*   ft_lstfind.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 16:16:07 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/07/05 16:16:08 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:14:43 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:14:44 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_wchar.h"
+#include "libft.h"
 
-char	*ft_wchartochar(wchar_t wchar)
+t_list	*ft_lstfind(t_list *list, void *content, size_t content_size)
 {
-	char	*s;
-	size_t	len;
-	size_t	n;
-
-	len = ft_wcharlen(wchar);
-	s = ft_strnew(len + 1);
-	if (len == 1)
+	if (!list || !content_size || !content)
+		return (NULL);
+	while (list)
 	{
-		*s = (char)wchar;
-		return (s);
+		if (content_size == list->content_size \
+			&& !ft_memcmp(list->content, content, content_size))
+			return (list);
+		list = list->next;
 	}
-	n = len;
-	while (n)
-	{
-		if (n != 1)
-		{
-			*(s + (n - 1)) = wchar % 64 + 128;
-			wchar >>= 6;
-		}
-		n--;
-	}
-	*s = ft_power(2, 8) - ft_power(2, 8 - len) + wchar;
-	return (s);
+	return (NULL);
 }

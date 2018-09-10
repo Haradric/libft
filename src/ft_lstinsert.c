@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wcharlen.c                                      :+:      :+:    :+:   */
+/*   ft_lstinsert.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 16:13:44 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/07/05 16:13:44 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/06/14 14:42:07 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/06/14 14:42:09 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_wchar.h"
+#include "libft.h"
 
-size_t	ft_wcharlen(wchar_t wchar)
+void	ft_lstinsert(t_list **list, t_list *prev, t_list *elem, t_list *next)
 {
-	if (wchar > 0 && wchar < 127)
-		return (1);
-	else if (wchar > 128 && wchar < 2047)
-		return (2);
-	else if (wchar > 2048 && wchar < 65535)
-		return (3);
-	else if (wchar > 65536 && wchar < 2097151)
-		return (4);
-	else if (wchar > 2097152 && wchar < 67108863)
-		return (5);
+	t_list	*last;
+
+	if (!*list || !elem)
+		return ;
+	last = ft_lstgetlast(elem);
+	if (prev)
+		prev->next = elem;
 	else
-		return (6);
+		*list = elem;
+	elem->prev = prev;
+	if (next)
+		next->prev = last;
+	last->next = next;
 }

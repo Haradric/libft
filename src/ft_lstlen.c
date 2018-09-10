@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstisinlist.c                                   :+:      :+:    :+:   */
+/*   ft_lstlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 16:12:30 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/07/05 16:12:31 by mbraslav         ###   ########.fr       */
+/*   Created: 2016/12/05 15:14:19 by mbraslav          #+#    #+#             */
+/*   Updated: 2016/12/05 15:14:23 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-int		ft_lstisinlist(t_list *list, t_list *elem)
+size_t	ft_lstlen(t_list *list)
 {
-	t_list	*last;
+	size_t	len;
 
-	if (!list || !elem)
-		return (0);
-	last = list;
-	while (last)
+	len = 0;
+	while (list)
 	{
-		if (last == elem)
-			return (1);
-		last = last->next;
+		list = list->next;
+		len++;
 	}
-	return (0);
+	return (len);
 }

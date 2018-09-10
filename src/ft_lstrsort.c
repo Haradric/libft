@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsort.c                                       :+:      :+:    :+:   */
+/*   ft_lstrsort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/06 19:05:18 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/03/06 19:05:19 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/03/22 15:21:35 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/03/22 15:21:37 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-void	ft_lstsort(t_list **list, int (*cmp)(void *a, void *b))
+void	ft_lstrsort(t_list **list, int (*cmp)(void *a, void *b))
 {
 	t_list	*sorted;
 	t_list	*last;
@@ -26,7 +26,7 @@ void	ft_lstsort(t_list **list, int (*cmp)(void *a, void *b))
 		last = *list;
 		while (last->next)
 		{
-			if (cmp(last, last->next) > 0)
+			if (cmp(last, last->next) < 0)
 			{
 				ft_lstswap(list, last, last->next);
 				swapped = 1;

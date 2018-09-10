@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstgetlast.c                                    :+:      :+:    :+:   */
+/*   ft_wcharlen.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/14 14:41:54 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/06/14 14:41:55 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:13:44 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:13:44 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-t_list	*ft_lstgetlast(t_list *list)
+size_t	ft_wcharlen(wchar_t wchar)
 {
-	t_list	*last;
-
-	if (!list)
-		return (NULL);
-	last = list;
-	while (last->next)
-		last = last->next;
-	return (last);
+	if (wchar > 0 && wchar < 127)
+		return (1);
+	else if (wchar > 128 && wchar < 2047)
+		return (2);
+	else if (wchar > 2048 && wchar < 65535)
+		return (3);
+	else if (wchar > 65536 && wchar < 2097151)
+		return (4);
+	else if (wchar > 2097152 && wchar < 67108863)
+		return (5);
+	else
+		return (6);
 }

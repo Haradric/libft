@@ -1,30 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfreelist.c                                   :+:      :+:    :+:   */
+/*   ft_lstdupelem.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 16:12:18 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/07/05 16:12:20 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:09:30 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:09:32 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-void	ft_lstfreelist(t_list **list, void (*freecont)(void *content))
+t_list	*ft_lstdupelem(t_list *elem)
 {
-	t_list	*tmp;
+	t_list	*dup;
 
-	if (!list || !*list)
-		return ;
-	while (*list)
-	{
-		tmp = (*list)->next;
-		if (freecont)
-			freecont((*list)->content);
-		free(*list);
-		*list = tmp;
-	}
-	*list = NULL;
+	if (!elem)
+		return (NULL);
+	dup = ft_lstnew(elem->content, elem->content_size);
+	dup->prev = elem->prev;
+	dup->next = elem->next;
+	return (dup);
 }

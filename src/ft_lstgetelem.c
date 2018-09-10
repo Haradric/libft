@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   ft_lstgetelem.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/30 19:33:44 by mbraslav          #+#    #+#             */
-/*   Updated: 2016/11/30 19:33:48 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/09/25 15:30:06 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/09/25 15:30:07 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+t_list	*ft_lstgetelem(t_list *list, size_t index)
 {
-	ft_lstpushfront(alst, new);
+	if (!list)
+		return (NULL);
+	while (list && index)
+	{
+		list = list->next;
+		index--;
+	}
+	if (index)
+		return (NULL);
+	return (list);
 }

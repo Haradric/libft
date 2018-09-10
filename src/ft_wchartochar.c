@@ -1,26 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlen.c                                        :+:      :+:    :+:   */
+/*   ft_wchartochar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/05 15:14:19 by mbraslav          #+#    #+#             */
-/*   Updated: 2016/12/05 15:14:23 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:16:07 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:16:08 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-size_t	ft_lstlen(t_list *list)
+char	*ft_wchartochar(wchar_t wchar)
 {
+	char	*s;
 	size_t	len;
+	size_t	n;
 
-	len = 0;
-	while (list)
+	len = ft_wcharlen(wchar);
+	s = ft_strnew(len + 1);
+	if (len == 1)
 	{
-		list = list->next;
-		len++;
+		*s = (char)wchar;
+		return (s);
 	}
-	return (len);
+	n = len;
+	while (n)
+	{
+		if (n != 1)
+		{
+			*(s + (n - 1)) = wchar % 64 + 128;
+			wchar >>= 6;
+		}
+		n--;
+	}
+	*s = ft_power(2, 8) - ft_power(2, 8 - len) + wchar;
+	return (s);
 }

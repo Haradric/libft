@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfind.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 16:14:43 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/07/05 16:14:44 by mbraslav         ###   ########.fr       */
+/*   Created: 2016/11/30 20:08:28 by mbraslav          #+#    #+#             */
+/*   Updated: 2016/11/30 20:08:32 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-t_list	*ft_lstfind(t_list *list, void *content, size_t content_size)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	if (!list || !content_size || !content)
+	t_list	*new;
+	t_list	*last;
+
+	if (!lst)
 		return (NULL);
-	while (list)
+	new = f(lst);
+	if (new == NULL)
+		return (NULL);
+	last = new;
+	while (lst->next)
 	{
-		if (content_size == list->content_size \
-			&& !ft_memcmp(list->content, content, content_size))
-			return (list);
-		list = list->next;
+		last->next = f(lst->next);
+		last = last->next;
+		lst = lst->next;
 	}
-	return (NULL);
+	return (new);
 }

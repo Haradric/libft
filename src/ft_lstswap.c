@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
 void		ft_lstswap(t_list **list, t_list *x, t_list *y)
 {

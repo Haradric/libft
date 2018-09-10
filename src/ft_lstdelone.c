@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wchar.h                                         :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 16:13:27 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/07/05 16:13:29 by mbraslav         ###   ########.fr       */
+/*   Created: 2016/11/30 18:29:54 by mbraslav          #+#    #+#             */
+/*   Updated: 2016/11/30 18:29:58 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_WCHAR_H
-# define FT_WCHAR_H
+#include "libft.h"
 
-# include "libft.h"
-
-size_t	ft_wcharlen(wchar_t wchar);
-char	*ft_wchartochar(wchar_t wchar);
-
-#endif
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
+{
+	if (!(*alst))
+		return ;
+	(del)((*alst)->content, (*alst)->content_size);
+	free(*alst);
+	*alst = NULL;
+}

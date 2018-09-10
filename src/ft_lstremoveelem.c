@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstfreeelem.c                                   :+:      :+:    :+:   */
+/*   ft_lstremoveelem.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/07/05 16:09:54 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/07/05 16:09:55 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:12:49 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:12:50 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-void	ft_lstfreeelem(t_list **list, t_list *elem, \
-						void (*freecont)(void *content))
+void	ft_lstremoveelem(t_list **list, t_list *elem)
 {
 	if (!(*list) || !elem || !ft_lstisinlist(*list, elem))
 		return ;
-	ft_lstremoveelem(list, elem);
-	if (freecont)
-		freecont(elem->content);
-	free(elem);
+	if (elem->prev)
+		elem->prev->next = elem->next;
+	else
+		*list = elem->next;
+	if (elem->next)
+		elem->next->prev = elem->prev;
+	elem->prev = NULL;
+	elem->next = NULL;
 }

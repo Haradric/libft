@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstpushback.c                                   :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/14 14:42:43 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/06/14 14:42:45 by mbraslav         ###   ########.fr       */
+/*   Created: 2016/11/30 19:33:44 by mbraslav          #+#    #+#             */
+/*   Updated: 2016/11/30 19:33:48 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-void	ft_lstpushback(t_list **list, t_list *elem)
+void	ft_lstadd(t_list **alst, t_list *new)
 {
-	t_list	*last;
-
-	if (!(*list))
-	{
-		*list = elem;
-		return ;
-	}
-	if (!elem)
-		return ;
-	last = ft_lstgetlast(*list);
-	last->next = elem;
-	elem->prev = last;
-	elem->next = NULL;
+	ft_lstpushfront(alst, new);
 }

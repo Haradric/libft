@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstpushfront.c                                  :+:      :+:    :+:   */
+/*   ft_lstfreelist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/14 14:42:50 by mbraslav          #+#    #+#             */
-/*   Updated: 2017/06/14 14:42:51 by mbraslav         ###   ########.fr       */
+/*   Created: 2017/07/05 16:12:18 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/07/05 16:12:20 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "libft.h"
 
-void	ft_lstpushfront(t_list **list, t_list *elem)
+void	ft_lstfreelist(t_list **list, void (*freecont)(void *content))
 {
-	if (!(*list))
-		*list = elem;
-	if (!elem)
+	t_list	*tmp;
+
+	if (!list || !*list)
 		return ;
-	(*list)->prev = elem;
-	elem->next = *list;
-	elem->prev = NULL;
-	*list = elem;
+	while (*list)
+	{
+		tmp = (*list)->next;
+		if (freecont)
+			freecont((*list)->content);
+		free(*list);
+		*list = tmp;
+	}
+	*list = NULL;
 }
