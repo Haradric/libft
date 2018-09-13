@@ -8,7 +8,10 @@ set(CMAKE_STATIC_LIBRARY_PREFIX "")
 add_library(libft STATIC "")
 
 target_compile_options(libft PUBLIC -Wall -Wextra -Werror)
-target_include_directories(libft PUBLIC include)
+target_include_directories(libft
+	PUBLIC
+		include
+)
 
 target_sources(libft
     PRIVATE
