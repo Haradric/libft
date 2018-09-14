@@ -1,19 +1,21 @@
 
-cmake_minimum_required(VERSION 3.8.0)
+cmake_minimum_required(VERSION 3.12)
 
 project(libft)
 
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
-add_library(libft STATIC "")
+add_library(${PROJECT_NAME} STATIC "")
 
-target_compile_options(libft PUBLIC -Wall -Wextra -Werror)
-target_include_directories(libft
-	PUBLIC
-		include
-)
+target_compile_options(${PROJECT_NAME} PUBLIC -Wall -Wextra -Werror)
 
-target_sources(libft
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+add_subdirectory(libftprintf)
+target_include_directories(libftprintf PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries(${PROJECT_NAME} libftprintf)
+
+target_sources(${PROJECT_NAME}
     PRIVATE
         src/ft_atoi.c
         src/ft_bzero.c

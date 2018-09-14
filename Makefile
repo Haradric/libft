@@ -96,25 +96,33 @@ SOURCE =	src/ft_memset.c        \
 			src/ft_wchartochar.c   \
 			src/ft_wcharlen.c
 
-OBJECT = $(SOURCE:.c=.o)
-NAME = libft.a
+OBJECT      = $(SOURCE:.c=.o)
+NAME        = libft.a
+LIBFTPRINTF = libftprintf.a
 
 all: $(NAME)
 
-$(NAME): $(OBJECT)
-	@echo "\033[34mcreating $(NAME)\033[39m"
+$(NAME): $(OBJECT) $(LIBFTPRINTF)
+	@echo "\033[34mcreating $@\033[39m"
 	@ar rc $(NAME) $(OBJECT)
-	@echo "\033[34mgenerating index to $(NAME)\033[39m"
+	@echo "\033[34mmerging libftprintf objects to $@\033[39m"
+	@ar r $(NAME) libftprintf/src/*.o
+	@echo "\033[34mgenerating index to $@\033[39m"
 	@ranlib $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -Iinclude -o $@ -c $<
+	$(CC) -Iinclude $(CFLAGS) -o $@ -c $<
+
+$(LIBFTPRINTF):
+	make -C libftprintf CFLAGS=-I../include
 
 clean:
+	@make -C libftprintf clean
 	@echo "\033[34mremoving object files of libft\033[39m"
 	@rm -f $(OBJECT)
 
 fclean:
+	@make -C libftprintf fclean
 	@echo "\033[34mremoving object files of libft\033[39m"
 	@rm -f $(OBJECT)
 	@echo "\033[34mremoving $(NAME)\033[39m"

@@ -40,7 +40,8 @@ size_t				ft_strlcat(char *dst, const char *src, size_t size);
 char				*ft_strchr(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *big, const char *little);
-char				*ft_strnstr(const char *big, const char *little, size_t len);
+char				*ft_strnstr(const char *big, const char *little, \
+							size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
@@ -85,26 +86,26 @@ void				*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 int					ft_power(int x, size_t n);
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
-void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t)); //
-void				ft_lstdel(t_list **alst, void (*del)(void *, size_t)); //
+void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
+void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void				ft_lstadd(t_list **alst, t_list *new);
-void				ft_lstiter(t_list *lst, void (*f)(t_list *elem)); //
-t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem)); //
+void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 size_t				ft_lstlen(t_list *list);
 t_list				*ft_lstgetelem(t_list *list, size_t index);
 t_list				*ft_lstgetlast(t_list *list);
 void				ft_lstswap(t_list **list, t_list *x, t_list *y);
-void				ft_lstsort(t_list **list, int (*cmp)(void *a, void *b)); //
-void				ft_lstrsort(t_list **list, int (*cmp)(void *a, void *b)); //
+void				ft_lstsort(t_list **list, int (*cmp)(void *a, void *b));
+void				ft_lstrsort(t_list **list, int (*cmp)(void *a, void *b));
 void				ft_lstfreelist(t_list **list, \
-								   void (*freecont)(void *content));
+							void (*freecont)(void *content));
 void				ft_lstfreeelem(t_list **list, t_list *elem, \
-								   void (*freecont)(void *content));
+							void (*freecont)(void *content));
 void				ft_lstpushback(t_list **list, t_list *elem);
 void				ft_lstpushfront(t_list **list, t_list *elem);
 void				ft_lstinsert(t_list **list, \
-								 t_list *prev, t_list *elem, t_list *next);
+							t_list *prev, t_list *elem, t_list *next);
 
 void				ft_lstremoveelem(t_list **list, t_list *elem);
 int					ft_lstisinlist(t_list *list, t_list *elem);
@@ -115,5 +116,7 @@ t_list				*ft_lstfind(t_list *list, void *content, \
 
 size_t				ft_wcharlen(wchar_t wchar);
 char				*ft_wchartochar(wchar_t wchar);
+
+int					ft_printf(const char *format, ...);
 
 #endif
