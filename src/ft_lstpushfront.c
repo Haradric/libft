@@ -14,12 +14,17 @@
 
 void	ft_lstpushfront(t_list **list, t_list *elem)
 {
-	if (!(*list))
-		*list = elem;
-	if (!elem)
+	if (elem == NULL)
 		return ;
-	(*list)->prev = elem;
-	elem->next = *list;
+	if (*list == NULL)
+	{
+		elem->next = NULL;
+	}
+	else
+	{
+		(*list)->prev = elem;
+		elem->next = *list;
+	}
 	elem->prev = NULL;
 	*list = elem;
 }
